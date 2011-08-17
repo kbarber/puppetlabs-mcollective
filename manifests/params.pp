@@ -21,6 +21,8 @@ class mcollective::params {
   $mc_daemonize         = '1'
   $mc_security_provider = 'psk'
   $mc_security_psk      = 'changemeplease'
+  $mc_fact_source       = 'facter'
+  $mc_classes_file      = '/var/lib/puppet/state/classes.txt'
 
   $nrpe_dir_real = $operatingsystem ? {
     /(?i-mx:centos|fedora|redhat|oel)/ => '/etc/nrpe.d',
@@ -67,7 +69,7 @@ class mcollective::params {
   $stomp_user    = 'mcollective'
   $stomp_passwd  = 'marionette'
   $stomp_server  = 'stomp'
-  $stomp_port    = '6163'
+  $stomp_port    = '61613'
 
   $pkg_state = 'present'
 

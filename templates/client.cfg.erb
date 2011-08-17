@@ -7,10 +7,17 @@ loglevel    = <%= mc_loglevel %>
 securityprovider = <%= mc_security_provider_real %>
 plugin.psk       = <%= mc_security_psk_real %>
 
+# SSL security provider
+plugin.ssl_server_public = /etc/mcollective/ssl/mc-server-global.pem
+plugin.ssl_client_private = /root/.mc/ssl/private-keys/ken@bob.sh.pem
+plugin.ssl_client_public = /root/.mc/ssl/public-keys/ken@bob.sh.pem
+
+# Certificate configuration
+plugin.ssl_serializer = yaml
+
 # Middleware
 connector = stomp
 plugin.stomp.host     = <%= stomp_server %>
 plugin.stomp.port     = <%= stomp_port %>
 plugin.stomp.user     = <%= stomp_user %>
 plugin.stomp.password = <%= stomp_passwd %>
-

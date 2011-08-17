@@ -103,6 +103,43 @@ class mcollective(
   anchor { 'mcollective::begin': }
   anchor { 'mcollective::end': }
 
+  # Common configuration
+  # TODO: make /etc/mcollective/ssl parameterized
+  file { "/etc/mcollective/":
+    ensure => directory,
+    owner => "root",
+    group => "root",
+    mode => "0755",
+    require => Anchor["mcollective::begin"]
+  }
+  file { "/etc/mcollective/ssl":
+    ensure => directory,
+    owner => "root",
+    group => "root",
+    mode => "0755",
+    require => Anchor["mcollective::begin"]
+  }
+
+  # TODO: destination should be configurable
+  file { "/etc/mcollective/ssl/mc-server-global.pem":
+    owner => "root",
+    group => "root",
+    mode => "0644",
+    content => get_pubkey("mc-server-global"),
+  }
+
+  # TODO: source should be a function? get_privkey()
+  file { "/etc/mcollective/ssl/mc-server-global-private.pem":
+    owner => "root",
+    group => "root",
+    mode => "0644",
+    content => file("/var/lib/puppet/ssl/private_keys/mc-server-global.pem"),
+  }
+
+  # Client keys
+  mcollective::clientkey { "ken@bob.sh": }
+  mcollective::clientkey { "mc-server-global": }
+
   if $server_real {
     class { 'mcollective::server::base':
       version     => $version_real,

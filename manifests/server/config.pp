@@ -33,4 +33,14 @@ class mcollective::server::config(
     notify  => Class['mcollective::server::service'],
   }
 
+  # Client SSL directory
+  file { "/etc/mcollective/ssl/clients":
+    ensure => directory,
+    owner => "root",
+    group => "root",
+    mode => "0755",
+    purge => true,
+    recurse => true,
+  }
+
 }

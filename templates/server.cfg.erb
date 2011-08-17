@@ -24,4 +24,14 @@ plugin.stomp.password = <%= stomp_passwd %>
 plugin.nrpe.conf_dir  = <%= nrpe_dir_real %>
 
 # Facts
-factsource = facter
+factsource = <%= mc_fact_source %>
+
+# Classes
+classesfile = <%= mc_classes_file %>
+
+# SSL configuration
+plugin.ssl_server_public = /etc/mcollective/ssl/mc-server-global.pem
+plugin.ssl_server_private = /etc/mcollective/ssl/mc-server-global-private.pem
+plugin.ssl_client_cert_dir = /etc/mcollective/ssl/clients/
+
+plugin.ssl_serializer = yaml
